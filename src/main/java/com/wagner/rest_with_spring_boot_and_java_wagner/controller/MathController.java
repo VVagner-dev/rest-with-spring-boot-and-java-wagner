@@ -21,6 +21,17 @@ public class MathController {
         return Double.parseDouble(numberOne.replace(",", ".")) + Double.parseDouble(numberTwo.replace(",", "."));
     }
 
+    @RequestMapping("/sub/{numberOne}/{numberTwo}")
+    public Double sub(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+
+    ) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw new UnsupportedMathOperetionException("Coloque um valor numerico");
+        return Double.parseDouble(numberOne.replace(",", ".")) - Double.parseDouble(numberTwo.replace(",", "."));
+    }
+
     private boolean isNumeric(String strNumber) {
         if (strNumber == null || strNumber.isEmpty())
             return false;
@@ -29,4 +40,5 @@ public class MathController {
             return true;
         return false;
     }
+
 }
