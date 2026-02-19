@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.wagner.rest_with_spring_boot_and_java_wagner.exception.ExceptionResponse;
-import com.wagner.rest_with_spring_boot_and_java_wagner.exception.UnsupportedMathOperetionException;
+import com.wagner.rest_with_spring_boot_and_java_wagner.exception.ResorceNotFoundException;
 
 @ControllerAdvice
 @RestController
@@ -27,13 +27,13 @@ public class CusomEntityResponseHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(UnsupportedMathOperetionException.class)
-    public final ResponseEntity<ExceptionResponse> hendlerBadRequestExceptions(Exception ex, WebRequest request) {
+    @ExceptionHandler(ResorceNotFoundException.class)
+    public final ResponseEntity<ExceptionResponse> hendlerNotFoundExceptions(Exception ex, WebRequest request) {
         ExceptionResponse response = new ExceptionResponse(
                 new Date(),
                 ex.getMessage(),
                 request.getDescription(false));
 
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 }

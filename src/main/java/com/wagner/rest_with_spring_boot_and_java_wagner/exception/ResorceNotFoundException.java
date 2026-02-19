@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class UnsupportedMathOperetionException extends RuntimeException {
+public class ResorceNotFoundException extends RuntimeException {
 
-    public UnsupportedMathOperetionException(String menssage) {
+    public ResorceNotFoundException(String menssage) {
         super(menssage);
     }
 
