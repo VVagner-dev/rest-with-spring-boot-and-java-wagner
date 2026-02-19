@@ -14,5 +14,7 @@ spring:
             ddl-auto: update
         properties:
             hibernate:
-                dialect: org.hibernate.dialect.MySQLDialect
         show-sql: false
+logging:
+  level:
+    com.wagner: debug

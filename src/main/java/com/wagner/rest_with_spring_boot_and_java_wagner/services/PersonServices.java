@@ -1,63 +1,50 @@
 package com.wagner.rest_with_spring_boot_and_java_wagner.services;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.logging.Logger;
-import org.springframework.web.bind.annotation.RestController;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.wagner.rest_with_spring_boot_and_java_wagner.exception.ResorceNotFoundException;
 import com.wagner.rest_with_spring_boot_and_java_wagner.model.Person;
+import com.wagner.rest_with_spring_boot_and_java_wagner.repository.PersonRepository;
 import com.wagner.rest_with_spring_boot_and_java_wagner.services.PersonServices;
 
-@RestController
+@Service
 public class PersonServices {
+    private Logger logger = LoggerFactory.getLogger(PersonServices.class.getName());
 
-    private final AtomicLong counter = new AtomicLong();
-
-    private Logger logger = Logger.getLogger(PersonServices.class.getName());
+    @Autowired
+    PersonRepository repository;
 
     public List<Person> findAll() {
         logger.info("Find all people");
-        List<Person> persons = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            persons.add(mockPerson(i));
-        }
-        return persons;
+        return repository.findAll();
 
     }
 
-    public Person findById(String id) {
+    public Person findById(Long id) {
         logger.info("Finding one Person");
-
-        Person person = new Person();
-
-        person.setId(counter.incrementAndGet());
-        person.setFistName("Wagner");
-        person.setLastName("Cristo");
-        person.setAddress("Da penha");
-        person.setGender("masculino");
-        return person;
+        return repository.findById(id).orElseThrow(() -> new ResorceNotFoundException("No record Found on this id"));
 
     }
 
     public Person create(Person person) {
-        logger.info("creating a person");
-        return person;
+        return repository.save(person);
     }
 
-    public void delete(String id) {
-        logger.info("delete one Person");
-
+    public Person put(Person person) {
+        findById(person.getId());
+        return repository.save(person);
     }
 
-    private Person mockPerson(int i) {
-        Person person = new Person();
+    public ResponseEntity<?> delete(Long id) {
+        repository.delete(findById(id));
+        logger.info("Delete one Person");
+        return ResponseEntity.noContent().build();
 
-        person.setId(counter.incrementAndGet());
-        person.setFistName("fist name - " + i);
-        person.setLastName("last name - " + i);
-        person.setAddress("address name - " + i);
-        person.setGender("gender name - " + i);
-        return person;
     }
 }

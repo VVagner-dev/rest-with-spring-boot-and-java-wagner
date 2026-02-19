@@ -2,23 +2,41 @@ package com.wagner.rest_with_spring_boot_and_java_wagner.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "person")
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fistName;
+    @Column(name = "first_name", nullable = false, length = 80)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 80)
     private String lastName;
+
+    @Column(nullable = false, length = 100)
     private String address;
+
+    @Column(nullable = false, length = 6)
     private String gender;
 
     public Person() {
     }
 
-    public Person(Long id, String fistName, String lastName, String address, String gender) {
+    public Person(Long id, String firstName, String lastName, String address, String gender) {
         this.id = id;
-        this.fistName = fistName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.gender = gender;
@@ -36,12 +54,12 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    public String getFistName() {
-        return fistName;
+    public String getfirstName() {
+        return firstName;
     }
 
-    public void setFistName(String fistName) {
-        this.fistName = fistName;
+    public void setfirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -73,7 +91,7 @@ public class Person implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((fistName == null) ? 0 : fistName.hashCode());
+        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         result = prime * result + ((address == null) ? 0 : address.hashCode());
         result = prime * result + ((gender == null) ? 0 : gender.hashCode());
@@ -94,10 +112,10 @@ public class Person implements Serializable {
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (fistName == null) {
-            if (other.fistName != null)
+        if (firstName == null) {
+            if (other.firstName != null)
                 return false;
-        } else if (!fistName.equals(other.fistName))
+        } else if (!firstName.equals(other.firstName))
             return false;
         if (lastName == null) {
             if (other.lastName != null)
