@@ -1,8 +1,6 @@
 package com.wagner.rest_with_spring_boot_and_java_wagner.controller;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wagner.rest_with_spring_boot_and_java_wagner.model.Person;
 import com.wagner.rest_with_spring_boot_and_java_wagner.services.PersonServices;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
