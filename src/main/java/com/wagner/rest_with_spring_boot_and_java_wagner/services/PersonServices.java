@@ -5,13 +5,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.PersonDTO;
 import com.wagner.rest_with_spring_boot_and_java_wagner.exception.ResorceNotFoundException;
+import static com.wagner.rest_with_spring_boot_and_java_wagner.mapper.ObjectMapper.perseObject;
 import com.wagner.rest_with_spring_boot_and_java_wagner.model.Person;
 import com.wagner.rest_with_spring_boot_and_java_wagner.repository.PersonRepository;
-import com.wagner.rest_with_spring_boot_and_java_wagner.services.PersonServices;
 
 @Service
 public class PersonServices {
@@ -20,31 +20,34 @@ public class PersonServices {
     @Autowired
     PersonRepository repository;
 
-    public List<Person> findAll() {
+    public List<PersonDTO> findAll() {
         logger.info("Find all people");
-        return repository.findAll();
+        return perseObject(repository.findAll(), PersonDTO.class);
 
     }
 
-    public Person findById(Long id) {
+    public PersonDTO findById(Long id) {
         logger.info("Finding one Person");
-        return repository.findById(id).orElseThrow(() -> new ResorceNotFoundException("No record Found on this id"));
+        return perseObject(
+                repository.findById(id).orElseThrow(() -> new ResorceNotFoundException("No record Found on this id")),
+                PersonDTO.class);
 
     }
 
-    public Person create(Person person) {
-        return repository.save(person);
+    public PersonDTO create(PersonDTO person) {
+        var entity = perseObject(person, Person.class);
+        return perseObject(repository.save(entity), PersonDTO.class);
     }
 
-    public Person put(Person person) {
+    public PersonDTO put(PersonDTO person) {
         findById(person.getId());
-        return repository.save(person);
+        var entity = perseObject(person, Person.class);
+        return perseObject(repository.save(entity), PersonDTO.class);
     }
 
-    public ResponseEntity<?> delete(Long id) {
-        repository.delete(findById(id));
+    public void delete(Long id) {
+        var entity = perseObject(findById(id), Person.class);
+        repository.delete(entity);
         logger.info("Delete one Person");
-        return ResponseEntity.noContent().build();
-
     }
 }
