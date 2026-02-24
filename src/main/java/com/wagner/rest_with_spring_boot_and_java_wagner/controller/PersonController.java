@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.PersonDTO;
+import com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.v1.PersonDTO;
+import com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.v2.PersonDTOV2;
 import com.wagner.rest_with_spring_boot_and_java_wagner.services.PersonServices;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,9 +33,14 @@ public class PersonController {
         return services.findById(id);
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(name = "/v2", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public PersonDTO create(@RequestBody PersonDTO person) {
         return services.create(person);
+    }
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public PersonDTO createV2(@RequestBody PersonDTOV2 person) {
+        return services.createV2(person);
     }
 
     @DeleteMapping(value = "/{id}")

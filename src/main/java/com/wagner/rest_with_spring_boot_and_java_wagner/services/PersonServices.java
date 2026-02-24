@@ -7,7 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.PersonDTO;
+import com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.v1.PersonDTO;
+import com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.v2.PersonDTOV2;
 import com.wagner.rest_with_spring_boot_and_java_wagner.exception.ResorceNotFoundException;
 import static com.wagner.rest_with_spring_boot_and_java_wagner.mapper.ObjectMapper.perseObject;
 import com.wagner.rest_with_spring_boot_and_java_wagner.model.Person;
@@ -35,6 +36,11 @@ public class PersonServices {
     }
 
     public PersonDTO create(PersonDTO person) {
+        var entity = perseObject(person, Person.class);
+        return perseObject(repository.save(entity), PersonDTO.class);
+    }
+
+    public PersonDTO createV2(PersonDTOV2 person) {
         var entity = perseObject(person, Person.class);
         return perseObject(repository.save(entity), PersonDTO.class);
     }

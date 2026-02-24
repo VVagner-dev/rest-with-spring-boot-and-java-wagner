@@ -1,24 +1,27 @@
-package com.wagner.rest_with_spring_boot_and_java_wagner.data.dto;
+package com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.v2;
 
 import java.io.Serializable;
+import java.util.Date;
 
-public class PersonDTO implements Serializable {
+public class PersonDTOV2 implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
     private String firstName;
     private String lastName;
+    private Date birthDay;
     private String address;
     private String gender;
 
-    public PersonDTO() {
+    public PersonDTOV2() {
     }
 
-    public PersonDTO(Long id, String firstName, String lastName, String address, String gender) {
+    public PersonDTOV2(Long id, String firstName, String lastName, Date birthDay, String address, String gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.birthDay = birthDay;
         this.address = address;
         this.gender = gender;
     }
@@ -35,11 +38,11 @@ public class PersonDTO implements Serializable {
         this.id = id;
     }
 
-    public String getfirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setfirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -49,6 +52,14 @@ public class PersonDTO implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Date getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
     }
 
     public String getAddress() {
@@ -74,6 +85,7 @@ public class PersonDTO implements Serializable {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+        result = prime * result + ((birthDay == null) ? 0 : birthDay.hashCode());
         result = prime * result + ((address == null) ? 0 : address.hashCode());
         result = prime * result + ((gender == null) ? 0 : gender.hashCode());
         return result;
@@ -87,7 +99,7 @@ public class PersonDTO implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PersonDTO other = (PersonDTO) obj;
+        PersonDTOV2 other = (PersonDTOV2) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -102,6 +114,11 @@ public class PersonDTO implements Serializable {
             if (other.lastName != null)
                 return false;
         } else if (!lastName.equals(other.lastName))
+            return false;
+        if (birthDay == null) {
+            if (other.birthDay != null)
+                return false;
+        } else if (!birthDay.equals(other.birthDay))
             return false;
         if (address == null) {
             if (other.address != null)
