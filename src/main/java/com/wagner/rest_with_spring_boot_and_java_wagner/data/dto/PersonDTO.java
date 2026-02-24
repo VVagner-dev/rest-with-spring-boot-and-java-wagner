@@ -2,7 +2,7 @@ package com.wagner.rest_with_spring_boot_and_java_wagner.data.dto;
 
 import java.io.Serializable;
 
-public class Person implements Serializable {
+public class PersonDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -12,10 +12,10 @@ public class Person implements Serializable {
     private String address;
     private String gender;
 
-    public Person() {
+    public PersonDTO() {
     }
 
-    public Person(Long id, String firstName, String lastName, String address, String gender) {
+    public PersonDTO(Long id, String firstName, String lastName, String address, String gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -87,7 +87,7 @@ public class Person implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Person other = (Person) obj;
+        PersonDTO other = (PersonDTO) obj;
         if (id == null) {
             if (other.id != null)
                 return false;

@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Startup<rest-with-spring-boot-and-java-wagner>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.wagner.rest_with_spring_boot_and_java_wagner.Startup",
+            "projectName": "rest-with-spring-boot-and-java-wagner",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
