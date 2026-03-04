@@ -1,5 +1,6 @@
 package com.wagner.rest_with_spring_boot_and_java_wagner.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,13 @@ public class PersonController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonDTO findById(@PathVariable("id") Long id) {
-        return services.findById(id);
+        var person = services.findById(id);
+        person.setBirthDay(new Date());
+        person.setPhoneNumber("+55 (27) 98121-3441");
+        person.setPhoneNumber("");
+        person.setLastName(null);
+        person.setSensitiveData("Fuba");
+        return person;
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
