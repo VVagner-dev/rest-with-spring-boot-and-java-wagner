@@ -1,6 +1,7 @@
 package com.wagner.rest_with_spring_boot_and_java_wagner.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -133,6 +134,11 @@ public class Person implements Serializable {
         } else if (!gender.equals(other.gender))
             return false;
         return true;
+    }
+
+    public void setBirthDay(Date date) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setBirthDay'");
     }
 
 }

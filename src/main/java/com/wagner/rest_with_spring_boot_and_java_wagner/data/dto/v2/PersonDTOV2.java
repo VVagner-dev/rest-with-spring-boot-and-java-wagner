@@ -10,9 +10,9 @@ public class PersonDTOV2 implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
-    private Date birthDay;
     private String address;
     private String gender;
+    private Date birthDay;
 
     public PersonDTOV2() {
     }

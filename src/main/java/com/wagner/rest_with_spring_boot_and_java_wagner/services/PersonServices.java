@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.v1.PersonDTO;
 import com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.v2.PersonDTOV2;
 import com.wagner.rest_with_spring_boot_and_java_wagner.exception.ResorceNotFoundException;
+import com.wagner.rest_with_spring_boot_and_java_wagner.mapper.custom.PersonMapper;
+
 import static com.wagner.rest_with_spring_boot_and_java_wagner.mapper.ObjectMapper.perseObject;
 import com.wagner.rest_with_spring_boot_and_java_wagner.model.Person;
 import com.wagner.rest_with_spring_boot_and_java_wagner.repository.PersonRepository;
@@ -20,6 +22,9 @@ public class PersonServices {
 
     @Autowired
     PersonRepository repository;
+
+    @Autowired
+    PersonMapper conveter;
 
     public List<PersonDTO> findAll() {
         logger.info("Find all people");
@@ -40,9 +45,9 @@ public class PersonServices {
         return perseObject(repository.save(entity), PersonDTO.class);
     }
 
-    public PersonDTO createV2(PersonDTOV2 person) {
-        var entity = perseObject(person, Person.class);
-        return perseObject(repository.save(entity), PersonDTO.class);
+    public PersonDTOV2 createV2(PersonDTOV2 person) {
+        var entity = conveter.convertDTOtoEntity(person);
+        return conveter.convertEntityToDTO(repository.save(entity));
     }
 
     public PersonDTO put(PersonDTO person) {
