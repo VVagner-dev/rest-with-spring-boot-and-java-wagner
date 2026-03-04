@@ -13,7 +13,7 @@ public class TesteLogControler {
 
     private Logger logger = LoggerFactory.getLogger(PersonServices.class.getName());
 
-    @GetMapping("/test")
+    @GetMapping("/api/test/v1")
     public String testLog() {
         logger.debug("debug log");
         logger.warn("warn log");
