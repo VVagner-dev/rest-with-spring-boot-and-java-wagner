@@ -3,7 +3,7 @@ package com.wagner.rest_with_spring_boot_and_java_wagner.unitedTest.mapper.mocks
 import java.util.ArrayList;
 import java.util.List;
 
-import com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.PersonDTO;
+import com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.v1.PersonDTO;
 import com.wagner.rest_with_spring_boot_and_java_wagner.model.Person;
 
 public class MockPerson {

@@ -1,41 +1,21 @@
-package com.wagner.rest_with_spring_boot_and_java_wagner.model;
+package com.wagner.rest_with_spring_boot_and_java_wagner.data.dto.v1;
 
 import java.io.Serializable;
-import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "person")
-public class Person implements Serializable {
+public class PersonDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "first_name", nullable = false, length = 80)
     private String firstName;
-
-    @Column(name = "last_name", nullable = false, length = 80)
     private String lastName;
-
-    @Column(nullable = false, length = 100)
     private String address;
-
-    @Column(nullable = false, length = 6)
     private String gender;
 
-    public Person() {
+    public PersonDTO() {
     }
 
-    public Person(Long id, String firstName, String lastName, String address, String gender) {
+    public PersonDTO(Long id, String firstName, String lastName, String address, String gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -107,7 +87,7 @@ public class Person implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Person other = (Person) obj;
+        PersonDTO other = (PersonDTO) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -134,11 +114,6 @@ public class Person implements Serializable {
         } else if (!gender.equals(other.gender))
             return false;
         return true;
-    }
-
-    public void setBirthDay(Date date) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setBirthDay'");
     }
 
 }
