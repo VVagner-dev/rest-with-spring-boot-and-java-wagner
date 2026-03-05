@@ -22,17 +22,21 @@ public class PersonController {
     @Autowired
     private PersonServices services;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_YAML_VALUE })
     public List<PersonDTO> findAll() {
         return services.findAll();
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_YAML_VALUE })
     public PersonDTO findById(@PathVariable("id") Long id) {
         return services.findById(id);
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_YAML_VALUE }, consumes = {
+                    MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_YAML_VALUE })
     public PersonDTO create(@RequestBody PersonDTO person) {
         return services.create(person);
     }
